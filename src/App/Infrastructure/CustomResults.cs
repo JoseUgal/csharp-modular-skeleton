@@ -1,6 +1,5 @@
 using Domain.Errors;
 using Domain.Results;
-using SharedKernel;
 
 namespace App.Infrastructure;
 

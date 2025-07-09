@@ -1,11 +1,12 @@
 using Application.Data;
 using Application.Time;
-using Domain;
 using Infrastructure.Database;
+using Infrastructure.Database.Interceptors;
 using Infrastructure.Time;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Infrastructure;
 
@@ -24,17 +25,29 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("Database");
 
-        Ensure.NotNullOrEmpty(connectionString);
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new ArgumentNullException(
+                connectionString,
+                "The database connection string is required."
+            );
+        }
 
-        services.AddDbContext<ApplicationDbContext>((_, options) =>
+        services.TryAddSingleton<UpdateAuditableEntitiesInterceptor>();
+
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.UseNpgsql(connectionString);
 
                 options.UseUpperSnakeCaseNamingConvention();
+
+                options.AddInterceptors(
+                    sp.GetRequiredService<UpdateAuditableEntitiesInterceptor>()
+                );
             }
         );
 
-        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

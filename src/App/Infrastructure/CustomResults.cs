@@ -4,8 +4,16 @@ using Domain.Results;
 namespace App.Infrastructure;
 
 
+/// <summary>
+/// Provides utility methods for creating ProblemResult objects from Result objects, adhering to RFC 7231 error response format.
+/// </summary>
 public static class CustomResults
 {
+    /// <summary>
+    /// Creates a ProblemResult from a Result object. Handles different error types to provide appropriate title, detail, type and status code.
+    /// </summary>
+    /// <param name="result">The Result object to convert.</param>
+    /// <returns>A ProblemResult representing the error from the Result object.</returns>
     public static IResult Problem(Result result)
     {
         if (result.IsSuccess)

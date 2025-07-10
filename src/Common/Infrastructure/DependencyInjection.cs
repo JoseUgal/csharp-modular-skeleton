@@ -10,8 +10,17 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Infrastructure;
 
+/// <summary>
+/// Configures infrastructure-specific services using dependency injection.
+/// </summary>
 public static class DependencyInjection
 {
+    /// <summary>
+    /// Adds infrastructure services to the dependency injection container.
+    /// </summary>
+    /// <param name="services">The IServiceCollection to configure.</param>
+    /// <param name="configuration">The application configuration.</param>
+    /// <returns>The configured IServiceCollection.</returns>
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
@@ -21,6 +30,12 @@ public static class DependencyInjection
         return services;
     }
 
+    /// <summary>
+    /// Configures database-related services.
+    /// </summary>
+    /// <param name="services">The IServiceCollection to configure.</param>
+    /// <param name="configuration">The application configuration.</param>
+    /// <returns>The configured IServiceCollection.</returns>
     private static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("Database");

@@ -9,9 +9,7 @@ namespace Infrastructure.Database.Interceptors;
 /// <summary>
 /// Represents the interceptor for updating auditable entity values.
 /// </summary>
-public sealed class UpdateAuditableEntitiesInterceptor(
-    IDateTimeProvider dateTimeProvider
-) : SaveChangesInterceptor
+public sealed class UpdateAuditableEntitiesInterceptor(IDateTimeProvider dateTimeProvider) : SaveChangesInterceptor
 {
     /// <inheritdoc />
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(

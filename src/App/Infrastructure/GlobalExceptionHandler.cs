@@ -3,9 +3,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Infrastructure;
 
-
+/// <summary>
+/// Handles unhandled exceptions globally within the application, providing a consistent error response.
+/// </summary>
 internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
+    /// <summary>
+    /// Attempts to handle an exception that occurred within the HTTP request pipeline.
+    /// </summary>
+    /// <param name="httpContext">The current HTTP context.</param>
+    /// <param name="exception">The exception that occurred.</param>
+    /// <param name="cancellationToken">A token that can be used to cancel the asynchronous operation.</param>
+    /// <returns>True if the exception was handled; otherwise, false.</returns>
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,

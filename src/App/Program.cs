@@ -1,7 +1,9 @@
 using System.Reflection;
 using App.Extensions;
+using App.Infrastructure;
 using Application;
 using Infrastructure;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,8 @@ builder.Services.AddProblemDetails();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
+builder.Host.UseSerilogWithConfiguration();
+
 var app = builder.Build();
 
 app.MapEndpoints();
@@ -30,6 +34,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSerilogRequestLogging();
+
+app.UseRequestContextLogging();
 
 app.UseExceptionHandler();
 

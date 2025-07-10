@@ -1,7 +1,7 @@
+using Application.Behaviors;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Application;
-
 
 /// <summary>
 /// Configures application-specific services using dependency injection.
@@ -18,6 +18,9 @@ public static class DependencyInjection
         services.AddMediatR(config =>
             {
                 config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
+
+                config.AddOpenBehavior(typeof(ExceptionHandlingPipelineBehavior<,>));
+                config.AddOpenBehavior(typeof(RequestLoggingPipelineBehavior<,>));
             }
         );
 

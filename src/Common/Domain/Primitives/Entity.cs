@@ -5,6 +5,27 @@ namespace Domain.Primitives;
 /// </summary>
 public abstract class Entity
 {
+    private List<IDomainEvent> _domainEvents = [];
+
+    /// <summary>
+    /// Gets the domain events and clears the list.
+    /// </summary>
+    /// <returns>The domain events.</returns>
+    protected IReadOnlyList<IDomainEvent> PullDomainEvents()
+    {
+        var domainEvents = _domainEvents.ToList();
+
+        _domainEvents = [];
+
+        return domainEvents;
+    }
+
+    /// <summary>
+    /// Add the specified domain event.
+    /// </summary>
+    /// <param name="domainEvent">The domain event.</param>
+    protected void Record(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Entity"/> class.
     /// </summary>

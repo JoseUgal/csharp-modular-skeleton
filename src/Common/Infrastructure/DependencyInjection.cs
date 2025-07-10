@@ -1,5 +1,7 @@
+using Application.Caching;
 using Application.Data;
 using Application.Time;
+using Infrastructure.Caching;
 using Infrastructure.Database;
 using Infrastructure.Database.Interceptors;
 using Infrastructure.Time;
@@ -26,6 +28,8 @@ public static class DependencyInjection
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         services.AddPersistence(configuration);
+
+        services.AddCaching();
 
         return services;
     }
@@ -63,6 +67,20 @@ public static class DependencyInjection
         );
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Configures caching-related services.
+    /// </summary>
+    /// <param name="services">The IServiceCollection to configure.</param>
+    /// <returns>The configured IServiceCollection.</returns>
+    private static IServiceCollection AddCaching(this IServiceCollection services)
+    {
+        services.AddDistributedMemoryCache();
+
+        services.AddSingleton<ICacheService, CacheService>();
 
         return services;
     }

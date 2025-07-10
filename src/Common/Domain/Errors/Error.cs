@@ -13,7 +13,12 @@ public record Error
     /// <summary>
     /// The null value error instance.
     /// </summary>
-    public static readonly Error NullValue = new("General.Null", "Null value was provided", ErrorType.Failure);
+    public static readonly Error NullValue = new("Error.NullValue", "The specified result value is null.", ErrorType.Failure);
+
+    /// <summary>
+    /// The condition not met error instance.
+    /// </summary>
+    public static readonly Error ConditionNotMet = new("Error.ConditionNotMet", "The specified condition was not met.", ErrorType.Failure);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Error"/> class.

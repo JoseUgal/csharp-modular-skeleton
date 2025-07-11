@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.Infrastructure;
+namespace App.ServiceInstallers.Exceptions;
 
 /// <summary>
 /// Handles unhandled exceptions globally within the application, providing a consistent error response.

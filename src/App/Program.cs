@@ -3,6 +3,7 @@ using App.Extensions;
 using App.Infrastructure;
 using Application;
 using Infrastructure;
+using Modules.Users.Application;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSwaggerWithConfiguration();
 
 builder.Services.AddApplication();
+builder.Services.AddUsersModule();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();

@@ -4,11 +4,13 @@ using Application.Time;
 using Infrastructure.Caching;
 using Infrastructure.Database;
 using Infrastructure.Database.Interceptors;
+using Infrastructure.Repositories;
 using Infrastructure.Time;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Modules.Users.Domain.Users;
 
 namespace Infrastructure;
 
@@ -30,6 +32,8 @@ public static class DependencyInjection
         services.AddPersistence(configuration);
 
         services.AddCaching();
+
+        services.AddRepositories();
 
         return services;
     }
@@ -81,6 +85,17 @@ public static class DependencyInjection
         services.AddDistributedMemoryCache();
 
         services.AddSingleton<ICacheService, CacheService>();
+
+        return services;
+    }
+
+    /// <summary>
+    /// Configures repositories from different modules
+    /// </summary>
+    /// <param name="services">The IServiceCollection to configure.</param>
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Modules.Users.Domain.Users;
 
 namespace Infrastructure.Database;
 
@@ -12,4 +13,9 @@ public sealed class ApplicationDbContext(DbContextOptions<ApplicationDbContext> 
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
+
+    /// <summary>
+    /// Access to the users.
+    /// </summary>
+    public DbSet<User> Users { get; set; }
 }

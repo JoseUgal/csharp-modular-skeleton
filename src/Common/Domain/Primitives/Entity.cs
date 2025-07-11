@@ -11,7 +11,7 @@ public abstract class Entity
     /// Gets the domain events and clears the list.
     /// </summary>
     /// <returns>The domain events.</returns>
-    protected IReadOnlyList<IDomainEvent> PullDomainEvents()
+    public IReadOnlyList<IDomainEvent> PullDomainEvents()
     {
         var domainEvents = _domainEvents.ToList();
 

@@ -1,6 +1,5 @@
 using System.Reflection;
 using App.Extensions;
-using App.Infrastructure;
 using Infrastructure.Extensions;
 using Serilog;
 
@@ -27,6 +26,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerWithUi();
 }
+
+app.UseCors(policy => policy
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowAnyOrigin()
+);
 
 app.UseHttpsRedirection();
 

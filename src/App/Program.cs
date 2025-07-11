@@ -1,18 +1,22 @@
 using System.Reflection;
 using App.Extensions;
 using App.Infrastructure;
-using Application;
-using Infrastructure;
-using Modules.Users.Application;
+using Infrastructure.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSwaggerWithConfiguration();
 
-builder.Services.AddApplication();
-builder.Services.AddUsersModule();
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.InstallServicesFromAssemblies(
+    builder.Configuration,
+    Infrastructure.AssemblyReference.Assembly
+);
+
+builder.Services.InstallModulesFromAssemblies(
+    builder.Configuration,
+    Modules.Users.Infrastructure.AssemblyReference.Assembly
+);
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 
@@ -29,8 +33,6 @@ app.MapEndpoints();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerWithUI();
-
-    app.ApplyMigrations();
 }
 
 app.UseHttpsRedirection();

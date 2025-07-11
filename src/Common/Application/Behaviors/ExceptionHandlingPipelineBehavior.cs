@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Behaviors;
 
-internal sealed class ExceptionHandlingPipelineBehavior<TRequest, TResponse>(
+public sealed class ExceptionHandlingPipelineBehavior<TRequest, TResponse>(
     ILogger<ExceptionHandlingPipelineBehavior<TRequest, TResponse>> logger
 ) : IPipelineBehavior<TRequest, TResponse> where TRequest : class
 {

@@ -13,4 +13,9 @@
       <ProjectReference Include="..\Modules.Users.Persistence\Modules.Users.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Polly" Version="8.6.2" />
+      <PackageReference Include="Quartz" Version="3.14.0" />
+    </ItemGroup>
+
 </Project>

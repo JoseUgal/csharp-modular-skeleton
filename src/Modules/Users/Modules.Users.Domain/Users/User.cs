@@ -16,7 +16,7 @@ public sealed class User : Entity, IAuditable
     {
         var user = new User(id, email, firstName, lastName);
 
-        user.Record(new UserCreatedDomainEvent(user.Id));
+        user.Record(new UserCreatedDomainEvent(Guid.NewGuid(), user.Id, DateTime.UtcNow));
 
         return user;
     }

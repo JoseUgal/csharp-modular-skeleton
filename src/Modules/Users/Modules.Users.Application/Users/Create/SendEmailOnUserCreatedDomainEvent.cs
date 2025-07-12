@@ -11,8 +11,6 @@ internal sealed class SendEmailOnUserCreatedDomainEvent : IDomainEventHandler<Us
 {
     public Task Handle(UserCreatedDomainEvent notification, CancellationToken cancellationToken)
     {
-        // TODO: Send email
-
-        return Task.CompletedTask;
+        throw new NotImplementedException();
     }
 }

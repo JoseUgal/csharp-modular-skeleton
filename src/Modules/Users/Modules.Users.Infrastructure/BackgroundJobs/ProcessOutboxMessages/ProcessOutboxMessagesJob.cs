@@ -56,10 +56,10 @@ internal sealed class ProcessOutboxMessagesJob(
     private async Task<List<OutboxMessageResponse>> GetOutboxMessagesAsync()
     {
         var sql = $"""
-                       SELECT id, content
-                       FROM users.outbox_messages
-                       WHERE processed_on_utc IS NULL
-                       ORDER BY occurred_on_utc
+                       SELECT "ID", "CONTENT"
+                       FROM "USERS"."OUTBOX_MESSAGES"
+                       WHERE "PROCESSED_ON_UTC" IS NULL
+                       ORDER BY "OCCURRED_ON_UTC"
                        LIMIT {options.Value.BatchSize}
                    """;
 
@@ -71,10 +71,10 @@ internal sealed class ProcessOutboxMessagesJob(
     private async Task UpdateOutboxMessageAsync(OutboxMessageResponse outboxMessage, Exception? exception)
     {
         const string sql = """
-                               UPDATE users.outbox_messages
-                               SET processed_on_utc = @ProcessedOnUtc,
-                                   error = @Error
-                               WHERE id = @Id
+                               UPDATE "USERS"."OUTBOX_MESSAGES"
+                               SET "PROCESSED_ON_UTC" = @ProcessedOnUtc,
+                                   "ERROR" = @Error
+                               WHERE "ID" = @Id
                            """;
 
         await sqlQueryExecutor.ExecuteAsync(

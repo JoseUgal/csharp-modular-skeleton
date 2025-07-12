@@ -6,17 +6,6 @@ namespace Persistence.Outbox;
 public sealed class OutboxMessage
 {
     /// <summary>
-    /// Marks the outbox message as processed and sets the optional error message.
-    /// </summary>
-    /// <param name="processedOn">The UTC date and time when the message was processed.</param>
-    /// <param name="error">The error message, if processing failed.</param>
-    public void SetProcessed(DateTime processedOn, string? error)
-    {
-        ProcessedOnUtc = processedOn;
-        Error = error;
-    }
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="OutboxMessage"/> class.
     /// </summary>
     /// <param name="id">The identifier.</param>

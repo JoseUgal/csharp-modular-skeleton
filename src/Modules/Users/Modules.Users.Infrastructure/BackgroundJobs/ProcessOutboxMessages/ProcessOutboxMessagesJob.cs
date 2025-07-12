@@ -2,11 +2,8 @@ using Application.Data;
 using Application.Time;
 using Domain.Primitives;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Modules.Users.Persistence;
 using Newtonsoft.Json;
-using Persistence.Outbox;
 using Polly;
 using Polly.Retry;
 using Quartz;
@@ -18,8 +15,7 @@ namespace Modules.Users.Infrastructure.BackgroundJobs.ProcessOutboxMessages;
 /// </summary>
 [DisallowConcurrentExecution]
 internal sealed class ProcessOutboxMessagesJob(
-    UsersDbContext dbContext,
-    IUnitOfWork unitOfWork,
+    ISqlQueryExecutor sqlQueryExecutor,
     IPublisher publisher,
     IDateTimeProvider dateTimeProvider,
     IOptions<ProcessOutboxMessagesOptions> options
@@ -57,24 +53,40 @@ internal sealed class ProcessOutboxMessagesJob(
         }
     }
 
-    private async Task<List<OutboxMessage>> GetOutboxMessagesAsync()
+    private async Task<List<OutboxMessageResponse>> GetOutboxMessagesAsync()
     {
-        var outboxMessages = await dbContext.Set<OutboxMessage>()
-            .Where(outboxMessage => outboxMessage.ProcessedOnUtc == null)
-            .OrderBy(outboxMessage => outboxMessage.OccurredOnUtc)
-            .Take(options.Value.BatchSize)
-            .ToListAsync();
+        var sql = $"""
+                       SELECT id, content
+                       FROM users.outbox_messages
+                       WHERE processed_on_utc IS NULL
+                       ORDER BY occurred_on_utc
+                       LIMIT {options.Value.BatchSize}
+                   """;
 
-        return outboxMessages;
+        var outboxMessages = await sqlQueryExecutor.QueryAsync<OutboxMessageResponse>(sql);
+
+        return outboxMessages.ToList();
     }
 
-    private async Task UpdateOutboxMessageAsync(OutboxMessage outboxMessage, Exception? exception)
+    private async Task UpdateOutboxMessageAsync(OutboxMessageResponse outboxMessage, Exception? exception)
     {
-        outboxMessage.SetProcessed(dateTimeProvider.UtcNow, exception?.ToString());
+        const string sql = """
+                               UPDATE users.outbox_messages
+                               SET processed_on_utc = @ProcessedOnUtc,
+                                   error = @Error
+                               WHERE id = @Id
+                           """;
 
-        dbContext.Set<OutboxMessage>().Update(outboxMessage);
-
-        await unitOfWork.SaveChangesAsync();
+        await sqlQueryExecutor.ExecuteAsync(
+            sql,
+            new
+            {
+                outboxMessage.Id,
+                ProcessedOnUtc = dateTimeProvider.UtcNow,
+                Error = exception?.ToString()
+            }
+        );
     }
 
+    internal sealed record OutboxMessageResponse(Guid Id, string Content);
 }

@@ -9,5 +9,10 @@ internal static class TableNames
     /// The users table.
     /// </summary>
     internal const string Users = "USERS";
+
+    /// <summary>
+    /// The outbox messages table.
+    /// </summary>
+    internal const string OutboxMessages = "OUTBOX_MESSAGES";
 }
 

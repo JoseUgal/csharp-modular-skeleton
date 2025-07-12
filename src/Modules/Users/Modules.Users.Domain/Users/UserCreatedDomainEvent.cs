@@ -3,5 +3,7 @@ using Domain.Primitives;
 namespace Modules.Users.Domain.Users;
 
 public sealed record UserCreatedDomainEvent(
-    Guid UserId
-) : IDomainEvent;
+    Guid Id,
+    Guid UserId,
+    DateTime OccurredOnUtc
+) : DomainEvent(Id, OccurredOnUtc);

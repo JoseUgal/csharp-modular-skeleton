@@ -48,7 +48,7 @@ public static class ServiceCollectionExtensions
         );
 
     /// <summary>
-    /// Adds all of the implementations of <see cref="ITransient"/> inside the specified assembly as transient.
+    /// Adds all the implementations of <see cref="ITransient"/> inside the specified assembly as transient.
     /// </summary>
     /// <param name="services">The services.</param>
     /// <param name="assembly">The assembly to scan for transient services.</param>

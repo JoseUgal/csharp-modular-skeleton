@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Behaviors;
 
-internal sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(
+public sealed class QueryCachingPipelineBehavior<TRequest, TResponse>(
     ICacheService cacheService,
     ILogger<QueryCachingPipelineBehavior<TRequest, TResponse>> logger
 ) : IPipelineBehavior<TRequest, TResponse> where TRequest : ICachedQuery where TResponse : Result

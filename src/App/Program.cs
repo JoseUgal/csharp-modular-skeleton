@@ -1,5 +1,5 @@
-using System.Reflection;
 using App.Extensions;
+using Endpoints.Extensions;
 using Infrastructure.Extensions;
 using Serilog;
 
@@ -16,7 +16,7 @@ builder.Services.InstallModulesFromAssemblies(
     Modules.Users.Infrastructure.AssemblyReference.Assembly
 );
 
-builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
+builder.Services.AddCors();
 
 builder.Host.UseSerilogWithConfiguration();
 

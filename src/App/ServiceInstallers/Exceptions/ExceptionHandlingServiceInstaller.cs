@@ -1,4 +1,3 @@
-using App.Infrastructure;
 using Infrastructure.Configuration;
 
 namespace App.ServiceInstallers.Exceptions;

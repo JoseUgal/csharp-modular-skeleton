@@ -1,8 +1,8 @@
 using Domain.Errors;
 using Domain.Results;
+using Microsoft.AspNetCore.Http;
 
-namespace App.Infrastructure;
-
+namespace Endpoints.Extensions;
 
 /// <summary>
 /// Provides utility methods for creating ProblemResult objects from Result objects, adhering to RFC 7231 error response format.
@@ -26,7 +26,8 @@ public static class CustomResults
             detail: GetDetail(result.Error),
             type: GetType(result.Error.Type),
             statusCode: GetStatusCode(result.Error.Type),
-            extensions: GetErrors(result));
+            extensions: GetErrors(result)
+        );
 
         static string GetTitle(Error error) =>
             error.Type switch

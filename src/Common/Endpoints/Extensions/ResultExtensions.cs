@@ -1,6 +1,6 @@
 using Domain.Results;
 
-namespace App.Extensions;
+namespace Endpoints.Extensions;
 
 /// <summary>
 /// Provides extension methods for working with Result objects, enabling pattern matching based on success or failure.

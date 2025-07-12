@@ -1,10 +1,14 @@
-using App.Extensions;
-using App.Infrastructure;
+using Endpoints;
+using Endpoints.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Modules.Users.Application.Users.Create;
+using Modules.Users.Endpoints.Routes;
 
-namespace App.Endpoints.Users;
+namespace Modules.Users.Endpoints.Users;
 
 /// <summary>
 /// Represents the endpoint for registering a new user.
@@ -13,7 +17,7 @@ internal sealed class Register : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("users", async ([FromBody] RegisterUserRequest request, ISender sender) =>
+        app.MapPost(UserRoutes.Register, async ([FromBody] RegisterUserRequest request, ISender sender) =>
             {
                 var command = new CreateUserCommand(
                     request.Email,
@@ -25,7 +29,7 @@ internal sealed class Register : IEndpoint
 
                 return result.Match(Results.Ok, CustomResults.Problem);
             }
-        );
+        ).WithTags(UserRoutes.Tag);
     }
 
     /// <summary>

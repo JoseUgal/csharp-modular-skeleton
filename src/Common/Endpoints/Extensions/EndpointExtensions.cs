@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
-using App.Endpoints;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace App.Extensions;
+namespace Endpoints.Extensions;
 
 /// <summary>
 /// Provides extension methods for registering and mapping endpoints in the application.

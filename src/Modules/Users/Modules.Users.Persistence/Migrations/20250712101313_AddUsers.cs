@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Modules.Users.Infrastructure.Database.Migrations
+namespace Modules.Users.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class AddUsers : Migration

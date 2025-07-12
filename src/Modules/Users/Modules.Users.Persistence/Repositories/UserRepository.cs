@@ -1,9 +1,8 @@
 using Application.ServiceLifetimes;
 using Microsoft.EntityFrameworkCore;
 using Modules.Users.Domain.Users;
-using Modules.Users.Infrastructure.Database;
 
-namespace Modules.Users.Infrastructure.Repositories;
+namespace Modules.Users.Persistence.Repositories;
 
 /// <summary>
 /// Represents the user repository.

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Modules.Users.Infrastructure.Database.Constants;
+using Modules.Users.Persistence.Constants;
 
-namespace Modules.Users.Infrastructure.Database;
+namespace Modules.Users.Persistence;
 
 /// <summary>
 /// Represents the users module database context.

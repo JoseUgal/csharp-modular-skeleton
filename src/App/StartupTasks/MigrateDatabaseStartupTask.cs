@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Modules.Users.Infrastructure.Database;
+using Modules.Users.Persistence;
 
 namespace App.StartupTasks;
 

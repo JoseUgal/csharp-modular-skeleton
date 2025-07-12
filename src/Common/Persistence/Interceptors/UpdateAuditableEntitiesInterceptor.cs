@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Infrastructure.Database.Interceptors;
+namespace Persistence.Interceptors;
 
 /// <summary>
 /// Represents the interceptor for updating auditable entity values.

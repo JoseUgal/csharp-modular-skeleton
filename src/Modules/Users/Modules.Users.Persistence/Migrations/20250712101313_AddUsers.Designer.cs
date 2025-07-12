@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Modules.Users.Infrastructure.Database;
+using Modules.Users.Persistence;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Modules.Users.Infrastructure.Database.Migrations
+namespace Modules.Users.Persistence.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20250711215308_AddUsers")]
+    [Migration("20250712101313_AddUsers")]
     partial class AddUsers
     {
         /// <inheritdoc />

@@ -1,4 +1,4 @@
-namespace Modules.Users.Infrastructure.Database.Constants;
+namespace Modules.Users.Persistence.Constants;
 
 /// <summary>
 /// Represents the table names in the users module.

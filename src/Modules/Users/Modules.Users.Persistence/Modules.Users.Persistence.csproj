@@ -7,10 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Common\Infrastructure\Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\Common\Persistence\Persistence.csproj" />
       <ProjectReference Include="..\Modules.Users.Application\Modules.Users.Application.csproj" />
-      <ProjectReference Include="..\Modules.Users.Endpoints\Modules.Users.Endpoints.csproj" />
-      <ProjectReference Include="..\Modules.Users.Persistence\Modules.Users.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

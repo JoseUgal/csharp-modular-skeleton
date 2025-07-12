@@ -1,7 +1,7 @@
 ﻿using Application.Data;
 using Application.ServiceLifetimes;
 
-namespace Modules.Users.Infrastructure.Database;
+namespace Modules.Users.Persistence;
 
 /// <summary>
 /// Represents the user's module unit of work.

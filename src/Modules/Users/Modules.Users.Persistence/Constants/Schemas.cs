@@ -1,4 +1,4 @@
-﻿namespace Modules.Users.Infrastructure.Database.Constants;
+﻿namespace Modules.Users.Persistence.Constants;
 
 /// <summary>
 /// Contains the schemas.

@@ -1,6 +1,6 @@
 ﻿using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
 
-namespace Infrastructure.Database.Extensions;
+namespace Persistence.Extensions;
 
 /// <summary>
 /// Contains extension method for the <see cref="NpgsqlDbContextOptionsBuilder"/> class.

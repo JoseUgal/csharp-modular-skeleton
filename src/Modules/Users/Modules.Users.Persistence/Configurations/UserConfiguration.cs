@@ -2,9 +2,9 @@ using Domain.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Modules.Users.Domain.Users;
-using Modules.Users.Infrastructure.Database.Constants;
+using Modules.Users.Persistence.Constants;
 
-namespace Modules.Users.Infrastructure.Database.Configurations;
+namespace Modules.Users.Persistence.Configurations;
 
 /// <summary>
 /// Represents the <see cref="User"/> entity configuration.
